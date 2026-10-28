@@ -59,7 +59,7 @@ $totals = get_cart_totals();
                                 <tr>
                                     <td>
                                         <div class="cart-item-info">
-                                            <img src="<?= htmlspecialchars($item['image_url']) ?>" alt="<?= htmlspecialchars($item['name']) ?>" class="cart-item-img">
+                                            <img src="<?= htmlspecialchars(format_image_url($item['image_url'])) ?>" alt="<?= htmlspecialchars($item['name']) ?>" class="cart-item-img">
                                             <div>
                                                 <h4 style="font-size: 1rem; margin-bottom: 0.25rem;">
                                                     <a href="product-detail.php?id=<?= $item['id'] ?>" style="color: var(--dark);"><?= htmlspecialchars($item['name']) ?></a>

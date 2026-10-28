@@ -173,7 +173,7 @@ if ($viewId > 0) {
                                 <td>
                                     <div style="display: flex; align-items: center; gap: 0.75rem;">
                                         <?php if ($it['image_url']): ?>
-                                            <img src="<?= htmlspecialchars($it['image_url']) ?>" style="width: 40px; height: 40px; border-radius: 6px; object-fit: cover;">
+                                            <img src="<?= htmlspecialchars(format_image_url($it['image_url'], '../')) ?>" style="width: 40px; height: 40px; border-radius: 6px; object-fit: cover;">
                                         <?php endif; ?>
                                         <strong><?= htmlspecialchars($it['product_name']) ?></strong>
                                     </div>

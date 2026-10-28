@@ -40,8 +40,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $isFeatured = isset($_POST['is_featured']) ? 1 : 0;
             $isNew = isset($_POST['is_new']) ? 1 : 0;
 
+            // Traitement de l'upload de photo depuis la machine
+            if (!empty($_FILES['product_file']['name']) && $_FILES['product_file']['error'] === UPLOAD_ERR_OK) {
+                $uploadDir = __DIR__ . '/../assets/images/products/';
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0755, true);
+                }
+                $fileInfo = pathinfo($_FILES['product_file']['name']);
+                $ext = strtolower($fileInfo['extension'] ?? '');
+                $allowedExts = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
+                
+                if (in_array($ext, $allowedExts)) {
+                    $newFileName = 'prod_' . date('Ymd_His') . '_' . bin2hex(random_bytes(4)) . '.' . $ext;
+                    $targetPath = $uploadDir . $newFileName;
+                    if (move_uploaded_file($_FILES['product_file']['tmp_name'], $targetPath)) {
+                        $imageUrl = 'assets/images/products/' . $newFileName;
+                    }
+                } else {
+                    set_flash_message('warning', 'Format de fichier non supporté. Utilisez JPG, PNG, WEBP ou GIF.');
+                }
+            }
+
+            // Si aucune nouvelle image n'a été uploadée ni URL saisie
             if (empty($imageUrl)) {
-                $imageUrl = 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80';
+                if ($prodId > 0 && !empty($editProduct['image_url'])) {
+                    $imageUrl = $editProduct['image_url'];
+                } else {
+                    $imageUrl = 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80';
+                }
             }
 
             if ($prodId > 0) {
@@ -148,7 +174,7 @@ $allProducts = $pdo->query("
                     <a href="products.php" class="btn btn-secondary btn-sm"><i class="bi bi-x-lg"></i> Annuler</a>
                 </div>
 
-                <form action="products.php" method="POST">
+                <form action="products.php" method="POST" enctype="multipart/form-data">
                     <?php csrf_field(); ?>
                     <input type="hidden" name="post_action" value="save">
                     <input type="hidden" name="id" value="<?= $editProduct['id'] ?? 0 ?>">
@@ -198,9 +224,39 @@ $allProducts = $pdo->query("
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-label">URL de l'image (Haute résolution)</label>
-                        <input type="url" name="image_url" class="form-control" placeholder="https://images.unsplash.com/photo-..." value="<?= htmlspecialchars($editProduct['image_url'] ?? '') ?>">
+                    <!-- Sélecteur d'image : Fichier local depuis la machine ou URL -->
+                    <div class="form-group" style="background: var(--light); border: 2px dashed var(--light-border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.5rem;">
+                        <label class="form-label" style="font-size: 1rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="bi bi-image-fill" style="color: var(--primary);"></i> Image du Produit
+                        </label>
+                        
+                        <!-- Option 1 : Fichier local -->
+                        <div style="margin-bottom: 1.25rem;">
+                            <label for="product_file" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--dark);">
+                                <i class="bi bi-folder2-open" style="color: var(--primary);"></i> Option 1 : Sélectionner une photo sur votre ordinateur
+                            </label>
+                            <input type="file" name="product_file" id="product_file" class="form-control" accept="image/png, image/jpeg, image/jpg, image/webp, image/gif" onchange="previewSelectedImage(this);">
+                            <small style="color: var(--dark-muted); font-size: 0.75rem;">Formats acceptés : JPG, PNG, WEBP, GIF</small>
+                        </div>
+
+                        <!-- Option 2 : URL web -->
+                        <div>
+                            <label for="image_url" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--dark);">
+                                <i class="bi bi-link-45deg" style="color: var(--primary);"></i> Option 2 : Ou renseigner une URL d'image web
+                            </label>
+                            <input type="text" name="image_url" id="image_url" class="form-control" placeholder="https://images.unsplash.com/photo-..." value="<?= htmlspecialchars($editProduct['image_url'] ?? '') ?>" oninput="previewUrlImage(this.value);">
+                        </div>
+
+                        <!-- Prévisualisation en direct -->
+                        <div id="previewContainer" style="margin-top: 1.25rem; display: flex; align-items: center; gap: 1rem; padding: 0.85rem 1rem; background: white; border-radius: var(--radius-md); border: 1px solid var(--light-border);">
+                            <img id="imagePreview" src="<?= !empty($editProduct['image_url']) ? htmlspecialchars(format_image_url($editProduct['image_url'], '../')) : 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=400&q=80' ?>" alt="Aperçu photo" style="width: 80px; height: 80px; object-fit: cover; border-radius: var(--radius-sm); border: 1px solid #e2e8f0;">
+                            <div>
+                                <strong style="font-size: 0.9rem; display: block;" id="previewTitle">Aperçu de la photo</strong>
+                                <small id="previewStatus" style="color: var(--dark-muted); font-size: 0.8rem;">
+                                    <?= !empty($editProduct['image_url']) ? 'Photo actuelle de l\'article' : 'Aperçu par défaut si aucun fichier n\'est choisi' ?>
+                                </small>
+                            </div>
+                        </div>
                     </div>
 
                     <div style="display: flex; gap: 2rem; margin: 1.5rem 0;">
@@ -251,7 +307,7 @@ $allProducts = $pdo->query("
                             <?php foreach ($allProducts as $p): ?>
                                 <tr>
                                     <td>
-                                        <img src="<?= htmlspecialchars($p['image_url']) ?>" style="width: 50px; height: 50px; border-radius: var(--radius-sm); object-fit: cover;">
+                                        <img src="<?= htmlspecialchars(format_image_url($p['image_url'], '../')) ?>" style="width: 50px; height: 50px; border-radius: var(--radius-sm); object-fit: cover;">
                                     </td>
                                     <td>
                                         <strong><?= htmlspecialchars($p['name']) ?></strong>
@@ -298,5 +354,31 @@ $allProducts = $pdo->query("
         <?php endif; ?>
     </div>
 
+    <script>
+        function previewSelectedImage(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById('imagePreview');
+                    img.src = e.target.result;
+                    const status = document.getElementById('previewStatus');
+                    status.textContent = 'Photo sélectionnée : ' + input.files[0].name + ' (' + Math.round(input.files[0].size / 1024) + ' Ko)';
+                    status.style.color = 'var(--success)';
+                    status.style.fontWeight = '700';
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function previewUrlImage(url) {
+            if (url && url.trim() !== '') {
+                const img = document.getElementById('imagePreview');
+                img.src = url;
+                const status = document.getElementById('previewStatus');
+                status.textContent = 'Aperçu depuis l\'adresse web saisie';
+                status.style.color = 'var(--primary)';
+            }
+        }
+    </script>
 </body>
 </html>

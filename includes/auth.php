@@ -253,3 +253,16 @@ function get_cart_totals(): array {
 function format_price(float $amount): string {
     return number_format($amount, 2, ',', ' ') . ' $';
 }
+
+/**
+ * Résout correctement l'URL d'une image qu'elle soit externe (http) ou locale sur le serveur
+ */
+function format_image_url(?string $url, string $pathPrefix = ''): string {
+    if (empty($url)) {
+        return 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80';
+    }
+    if (str_starts_with($url, 'http://') || str_starts_with($url, 'https://')) {
+        return $url;
+    }
+    return $pathPrefix . ltrim($url, '/');
+}

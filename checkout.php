@@ -172,7 +172,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div style="max-height: 280px; overflow-y: auto; margin-bottom: 1.5rem; padding-right: 0.5rem;">
                     <?php foreach ($cart as $item): ?>
                         <div style="display: flex; align-items: center; gap: 0.85rem; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--light-border);">
-                            <img src="<?= htmlspecialchars($item['image_url']) ?>" style="width: 50px; height: 50px; border-radius: var(--radius-sm); object-fit: cover;">
+                            <img src="<?= htmlspecialchars(format_image_url($item['image_url'])) ?>" style="width: 50px; height: 50px; border-radius: var(--radius-sm); object-fit: cover;">
                             <div style="flex: 1;">
                                 <h5 style="font-size: 0.9rem; margin-bottom: 0.2rem;"><?= htmlspecialchars($item['name']) ?></h5>
                                 <span style="font-size: 0.8rem; color: var(--dark-muted);">Qté : <?= $item['quantity'] ?> &times; <?= format_price($item['price']) ?></span>

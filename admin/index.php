@@ -218,7 +218,7 @@ $lowStockProducts = $pdo->query("SELECT * FROM products WHERE stock <= 5 ORDER B
                     <div style="display: flex; flex-direction: column; gap: 1rem;">
                         <?php foreach ($lowStockProducts as $low): ?>
                             <div style="display: flex; align-items: center; gap: 0.75rem; border-bottom: 1px solid var(--light-border); padding-bottom: 0.75rem;">
-                                <img src="<?= htmlspecialchars($low['image_url']) ?>" style="width: 44px; height: 44px; border-radius: var(--radius-sm); object-fit: cover;">
+                                <img src="<?= htmlspecialchars(format_image_url($low['image_url'], '../')) ?>" style="width: 44px; height: 44px; border-radius: var(--radius-sm); object-fit: cover;">
                                 <div style="flex: 1;">
                                     <div style="font-size: 0.85rem; font-weight: 600;"><?= htmlspecialchars($low['name']) ?></div>
                                     <span style="font-size: 0.75rem; color: <?= $low['stock'] == 0 ? 'var(--danger)' : 'var(--warning)' ?>; font-weight: 700;">

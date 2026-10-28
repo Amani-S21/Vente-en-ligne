@@ -175,7 +175,7 @@ $categoriesList = $catCountStmt->fetchAll();
         <?php foreach ($featuredProducts as $product): ?>
             <div class="product-card">
                 <div class="product-thumb">
-                    <img src="<?= htmlspecialchars($product['image_url']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" loading="lazy">
+                    <img src="<?= htmlspecialchars(format_image_url($product['image_url'])) ?>" alt="<?= htmlspecialchars($product['name']) ?>" loading="lazy">
                     <div class="product-badges">
                         <?php if ($product['old_price'] && $product['old_price'] > $product['price']): ?>
                             <span class="badge-tag badge-promo">-<?= round((1 - ($product['price'] / $product['old_price'])) * 100) ?>%</span>
@@ -269,7 +269,7 @@ $categoriesList = $catCountStmt->fetchAll();
         <?php foreach ($newProducts as $product): ?>
             <div class="product-card">
                 <div class="product-thumb">
-                    <img src="<?= htmlspecialchars($product['image_url']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" loading="lazy">
+                    <img src="<?= htmlspecialchars(format_image_url($product['image_url'])) ?>" alt="<?= htmlspecialchars($product['name']) ?>" loading="lazy">
                     <div class="product-badges">
                         <span class="badge-tag badge-new">Nouveau</span>
                     </div>

@@ -80,10 +80,10 @@ require_once __DIR__ . '/includes/header.php';
     <div class="detail-layout">
         <!-- Galerie Produit -->
         <div class="detail-gallery">
-            <img src="<?= htmlspecialchars($product['image_url']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" class="detail-main-img" id="mainProductImage">
+            <img src="<?= htmlspecialchars(format_image_url($product['image_url'])) ?>" alt="<?= htmlspecialchars($product['name']) ?>" class="detail-main-img" id="mainProductImage">
             
             <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-                <img src="<?= htmlspecialchars($product['image_url']) ?>" style="width: 80px; height: 80px; object-fit: cover; border-radius: var(--radius-sm); border: 2px solid var(--primary); cursor: pointer;">
+                <img src="<?= htmlspecialchars(format_image_url($product['image_url'])) ?>" style="width: 80px; height: 80px; object-fit: cover; border-radius: var(--radius-sm); border: 2px solid var(--primary); cursor: pointer;">
             </div>
         </div>
 
@@ -275,7 +275,7 @@ require_once __DIR__ . '/includes/header.php';
                 <?php foreach ($relatedProducts as $rel): ?>
                     <div class="product-card">
                         <div class="product-thumb">
-                            <img src="<?= htmlspecialchars($rel['image_url']) ?>" alt="<?= htmlspecialchars($rel['name']) ?>" loading="lazy">
+                            <img src="<?= htmlspecialchars(format_image_url($rel['image_url'])) ?>" alt="<?= htmlspecialchars($rel['name']) ?>" loading="lazy">
                         </div>
                         <div class="product-body">
                             <h3 class="product-title">

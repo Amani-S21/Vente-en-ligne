@@ -64,7 +64,7 @@ $items = $itemStmt->fetchAll();
                 <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid var(--light-border);">
                     <div style="display: flex; align-items: center; gap: 1rem;">
                         <?php if ($item['image_url']): ?>
-                            <img src="<?= htmlspecialchars($item['image_url']) ?>" style="width: 48px; height: 48px; border-radius: var(--radius-sm); object-fit: cover;">
+                            <img src="<?= htmlspecialchars(format_image_url($item['image_url'])) ?>" style="width: 48px; height: 48px; border-radius: var(--radius-sm); object-fit: cover;">
                         <?php endif; ?>
                         <div>
                             <div style="font-weight: 600;"><?= htmlspecialchars($item['product_name']) ?></div>
