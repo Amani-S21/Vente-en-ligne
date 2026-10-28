@@ -27,6 +27,8 @@
                     <ul class="footer-links">
                         <li><a href="index.php"><i class="bi bi-chevron-right"></i> Page d'accueil</a></li>
                         <li><a href="products.php"><i class="bi bi-chevron-right"></i> Tous les produits</a></li>
+                        <li><a href="about.html"><i class="bi bi-chevron-right"></i> À Propos</a></li>
+                        <li><a href="contact.html"><i class="bi bi-chevron-right"></i> Contact & Support</a></li>
                         <li><a href="cart.php"><i class="bi bi-chevron-right"></i> Mon panier</a></li>
                         <li><a href="track.php"><i class="bi bi-chevron-right"></i> Suivi de commande</a></li>
                         <li><a href="profile.php"><i class="bi bi-chevron-right"></i> Mon compte client</a></li>

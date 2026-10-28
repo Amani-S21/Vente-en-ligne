@@ -122,7 +122,9 @@ Puis ouvrez votre navigateur sur : **[http://127.0.0.1:8000](http://127.0.0.1:80
 ```
 VENTE EN LIGNE/
 │
-├── index.php                 # Page d'accueil (Landing Page)
+├── index.php                 # Page d'accueil (Landing Page dynamique)
+├── about.html                # Page de présentation de l'entreprise (HTML5 pur)
+├── contact.html              # Page de contact et assistance client (HTML5 pur)
 ├── products.php              # Catalogue avec recherche et filtres
 ├── product-detail.php        # Consultation détaillée et avis clients
 ├── cart.php                  # Panier d'achat avec coupons et calculs

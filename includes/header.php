@@ -73,6 +73,8 @@ $pageTitle = $pageTitle ?? 'NovaStore - Boutique en Ligne Moderne';
                     <ul class="nav-links">
                         <li><a href="index.php" class="<?= basename($_SERVER['PHP_SELF']) === 'index.php' ? 'active' : '' ?>"><i class="bi bi-house"></i> Accueil</a></li>
                         <li><a href="products.php" class="<?= basename($_SERVER['PHP_SELF']) === 'products.php' ? 'active' : '' ?>"><i class="bi bi-grid"></i> Catalogue</a></li>
+                        <li><a href="about.html"><i class="bi bi-info-circle"></i> À Propos</a></li>
+                        <li><a href="contact.html"><i class="bi bi-envelope"></i> Contact</a></li>
                         <li><a href="track.php" class="<?= basename($_SERVER['PHP_SELF']) === 'track.php' ? 'active' : '' ?>"><i class="bi bi-truck"></i> Suivi Colis</a></li>
                         <?php if (is_admin()): ?>
                             <li><a href="admin/index.php" style="color: #4f46e5; font-weight: 700;"><i class="bi bi-speedometer2"></i> Administration</a></li>
