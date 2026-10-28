@@ -20,8 +20,9 @@ $sql = "
 $params = [];
 
 if ($search !== '') {
-    $sql .= " AND (p.name LIKE ? OR p.description LIKE ? OR p.short_desc LIKE ?)";
-    $likeSearch = '%' . $search . '%';
+    $sql .= " AND (LOWER(p.name) LIKE ? OR LOWER(p.description) LIKE ? OR LOWER(p.short_desc) LIKE ? OR LOWER(c.name) LIKE ?)";
+    $likeSearch = '%' . mb_strtolower($search, 'UTF-8') . '%';
+    $params[] = $likeSearch;
     $params[] = $likeSearch;
     $params[] = $likeSearch;
     $params[] = $likeSearch;

@@ -206,14 +206,27 @@ img {
   background-color: white;
   box-shadow: 0 0 0 4px var(--primary-light);
 }
-.header-search .search-icon {
+.header-search .search-submit-btn {
   position: absolute;
-  left: 1rem;
+  left: 0.5rem;
   top: 50%;
   transform: translateY(-50%);
   color: var(--dark-muted);
-  pointer-events: none;
-  font-size: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.05rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+.header-search .search-submit-btn:hover {
+  color: var(--primary);
+  background-color: var(--primary-light);
 }
 
 /* Navigation principale */

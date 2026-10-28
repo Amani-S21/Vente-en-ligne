@@ -64,7 +64,9 @@ $pageTitle = $pageTitle ?? 'NovaStore - Boutique en Ligne Moderne';
 
                 <!-- Formulaire de recherche dynamique -->
                 <form action="products.php" method="GET" class="header-search" id="headerSearchForm">
-                    <i class="bi bi-search search-icon"></i>
+                    <button type="submit" class="search-submit-btn" title="Lancer la recherche" aria-label="Rechercher">
+                        <i class="bi bi-search"></i>
+                    </button>
                     <input type="text" name="q" placeholder="Rechercher un produit, une marque, un modèle..." value="<?= isset($_GET['q']) ? htmlspecialchars($_GET['q']) : '' ?>" autocomplete="off" required>
                 </form>
 

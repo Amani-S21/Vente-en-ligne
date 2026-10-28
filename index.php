@@ -50,8 +50,27 @@ $categoriesList = $catCountStmt->fetchAll();
                 L'Excellence du <span>Shopping en Ligne</span> Réinventée
             </h1>
             <p class="hero-desc">
-                Découvrez des articles high-tech d'élite, des équipements audio haute fidélité et les dernières tendances mode avec une garantie d'authenticité et un suivi de colis en direct.
+                Découvrez des articles high-tech d'élite, des équipements audio haute fidélité et les dernières tendances mode avec une garantie d'authenticité et un suivi de colis en direct à Goma (Nord-Kivu) et dans toute la région.
             </p>
+
+            <!-- Barre de recherche rapide de la page d'accueil -->
+            <form action="products.php" method="GET" class="hero-search-box" style="margin: 1.5rem 0 2rem; max-width: 540px;">
+                <div style="display: flex; gap: 0.5rem; background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(12px); padding: 0.45rem; border-radius: var(--radius-full); box-shadow: 0 15px 30px rgba(0,0,0,0.3); border: 2px solid rgba(255,255,255,0.4);">
+                    <input type="text" name="q" placeholder="Quel article recherchez-vous ? (ex: iPhone, MacBook, Sony...)" required style="flex: 1; border: none; outline: none; background: transparent; padding: 0.65rem 1.25rem; font-family: var(--font-main); font-size: 0.95rem; color: var(--dark);">
+                    <button type="submit" class="btn btn-primary" style="border-radius: var(--radius-full); padding: 0.65rem 1.5rem; font-weight: 700; white-space: nowrap;">
+                        <i class="bi bi-search"></i> Rechercher
+                    </button>
+                </div>
+                <div style="margin-top: 0.75rem; font-size: 0.8rem; color: #cbd5e1; display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
+                    <span style="font-weight: 600;"><i class="bi bi-fire" style="color: #f59e0b;"></i> Tendances :</span>
+                    <a href="products.php?q=MacBook" style="color: #a5b4fc; text-decoration: underline;">MacBook</a>
+                    <a href="products.php?q=iPhone" style="color: #a5b4fc; text-decoration: underline;">iPhone 15</a>
+                    <a href="products.php?q=Sony" style="color: #a5b4fc; text-decoration: underline;">Casque Sony</a>
+                    <a href="products.php?q=Sneakers" style="color: #a5b4fc; text-decoration: underline;">Sneakers</a>
+                    <a href="products.php?q=Montre" style="color: #a5b4fc; text-decoration: underline;">Montre Ultra</a>
+                </div>
+            </form>
+
             <div class="hero-cta">
                 <a href="products.php" class="btn btn-primary btn-lg" id="heroExploreBtn">
                     <i class="bi bi-cart3"></i> Explorer la boutique
