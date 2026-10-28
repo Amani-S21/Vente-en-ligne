@@ -113,18 +113,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     <div class="form-group">
                         <label class="form-label">Adresse complète de livraison (Rue, Quartier, N°) *</label>
-                        <textarea name="shipping_address" required rows="2" class="form-control" placeholder="Ex: 45 Boulevard du 30 Juin, Résidence Elysée, Appartement 4B"><?= htmlspecialchars($_SESSION['checkout_data']['shipping_address'] ?? $userData['address'] ?? '') ?></textarea>
+                        <textarea name="shipping_address" required rows="2" class="form-control" placeholder="Ex: 88 Boulevard Kanyamuhanga, Quartier Himbi, Goma"><?= htmlspecialchars($_SESSION['checkout_data']['shipping_address'] ?? $userData['address'] ?? '') ?></textarea>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">Ville de livraison *</label>
-                            <input type="text" name="shipping_city" required class="form-control" placeholder="Ex: Kinshasa" value="<?= htmlspecialchars($_SESSION['checkout_data']['shipping_city'] ?? $userData['city'] ?? 'Kinshasa') ?>">
+                            <input type="text" name="shipping_city" required class="form-control" placeholder="Ex: Goma (Nord-Kivu)" value="<?= htmlspecialchars($_SESSION['checkout_data']['shipping_city'] ?? $userData['city'] ?? 'Goma (Nord-Kivu)') ?>">
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label">Pays</label>
-                            <input type="text" readonly class="form-control" value="RDC / International" style="background: #e2e8f0; cursor: not-allowed;">
+                            <label class="form-label">Province / Pays</label>
+                            <input type="text" readonly class="form-control" value="Nord-Kivu, RDC" style="background: #e2e8f0; cursor: not-allowed;">
                         </div>
                     </div>
 

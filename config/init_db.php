@@ -96,8 +96,8 @@ function initializeDatabase(PDO $pdo): void {
     $userPass = password_hash('password123', PASSWORD_BCRYPT);
 
     $stmt = $pdo->prepare("INSERT INTO users (full_name, email, password, role, phone, address, city) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->execute(['Administrateur Pro', 'admin@boutique.com', $adminPass, 'admin', '+243 810 000 001', '12 Avenue de la Paix, Gombe', 'Kinshasa']);
-    $stmt->execute(['Jean-Luc Mukendi', 'client@boutique.com', $userPass, 'customer', '+243 820 000 002', '45 Boulevard du 30 Juin', 'Kinshasa']);
+    $stmt->execute(['Administrateur Pro', 'admin@boutique.com', $adminPass, 'admin', '+243 810 000 001', '15 Avenue des Volcans, Quartier Les Volcans', 'Goma (Nord-Kivu)']);
+    $stmt->execute(['Jean-Luc Paluku', 'client@boutique.com', $userPass, 'customer', '+243 820 000 002', '88 Boulevard Kanyamuhanga, Quartier Himbi', 'Goma (Nord-Kivu)']);
 
     // 3. Insérer catégories
     $categories = [
@@ -265,13 +265,13 @@ function initializeDatabase(PDO $pdo): void {
     // 5. Insérer des commandes de démonstration pour tester le suivi immédiatement
     $orders = [
         [
-            2, // Client Jean-Luc Mukendi
+            2, // Client Jean-Luc Paluku
             'CMD-2026-001',
             'TRK-8921-CD',
             349.00, 10.00, 55.84,
             'shipped', // Statut: Expédiée
-            'Jean-Luc Mukendi', 'client@boutique.com', '+243 820 000 002',
-            '45 Boulevard du 30 Juin, Résidence Elysée', 'Kinshasa',
+            'Jean-Luc Paluku', 'client@boutique.com', '+243 820 000 002',
+            '88 Boulevard Kanyamuhanga, Quartier Himbi', 'Goma (Nord-Kivu)',
             'mobile_money', 'paid'
         ],
         [
@@ -280,8 +280,8 @@ function initializeDatabase(PDO $pdo): void {
             'TRK-4412-CD',
             139.00, 5.00, 22.24,
             'delivered', // Statut: Livrée
-            'Jean-Luc Mukendi', 'client@boutique.com', '+243 820 000 002',
-            '45 Boulevard du 30 Juin, Résidence Elysée', 'Kinshasa',
+            'Jean-Luc Paluku', 'client@boutique.com', '+243 820 000 002',
+            '88 Boulevard Kanyamuhanga, Quartier Himbi', 'Goma (Nord-Kivu)',
             'card', 'paid'
         ]
     ];

@@ -12,7 +12,7 @@ $pdo = getDBConnection();
 $fullName = '';
 $email = '';
 $phone = '';
-$city = 'Kinshasa';
+$city = 'Goma (Nord-Kivu)';
 $address = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $fullName = trim(sanitize($_POST['full_name'] ?? ''));
         $email = trim(sanitize($_POST['email'] ?? ''));
         $phone = trim(sanitize($_POST['phone'] ?? ''));
-        $city = trim(sanitize($_POST['city'] ?? 'Kinshasa'));
+        $city = trim(sanitize($_POST['city'] ?? 'Goma (Nord-Kivu)'));
         $address = trim(sanitize($_POST['address'] ?? ''));
         $password = $_POST['password'] ?? '';
         $passwordConfirm = $_POST['password_confirm'] ?? '';
@@ -108,12 +108,12 @@ require_once __DIR__ . '/includes/header.php';
             <div class="form-row">
                 <div class="form-group">
                     <label class="form-label">Ville de résidence</label>
-                    <input type="text" name="city" class="form-control" placeholder="Ex: Kinshasa" value="<?= htmlspecialchars($city) ?>">
+                    <input type="text" name="city" class="form-control" placeholder="Ex: Goma (Nord-Kivu)" value="<?= htmlspecialchars($city) ?>">
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Adresse / Quartier</label>
-                    <input type="text" name="address" class="form-control" placeholder="Ex: Gombe, Avenue de la Libération" value="<?= htmlspecialchars($address) ?>">
+                    <input type="text" name="address" class="form-control" placeholder="Ex: Quartier Himbi, Avenue des Volcans" value="<?= htmlspecialchars($address) ?>">
                 </div>
             </div>
 
